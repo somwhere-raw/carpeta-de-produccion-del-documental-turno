@@ -16,7 +16,7 @@ Este prototipo contiene:
 - Flechas izquierda y derecha del teclado.
 - Deslizamiento táctil en móvil.
 - Interfaz animada en una barra lateral izquierda en escritorio y superior en móvil vertical.
-- Cabecera móvil con identidad `Turno / Carpeta de producción`, línea amarilla vertical e iconos vectoriales centrados.
+- Cabecera móvil con identidad `Turno / Carpeta de producción`, línea amarilla vertical y grupo de iconos vectoriales alineado a la derecha.
 - Modo de pantalla completa propio para móvil vertical: conserva la cabecera accesible y expande la hoja de borde a borde horizontal.
 - Los botones `Índice` y `Páginas` abren y cierran sus propios paneles; no se utilizan cruces de cierre.
 - Panel de miniaturas superpuesto, sin títulos auxiliares y sin redimensionar el libro; permanece abierto hasta pulsar nuevamente `Páginas`.
@@ -25,6 +25,7 @@ Este prototipo contiene:
 - En pantalla completa, el cajón extendido se guarda completamente debajo de la barra principal antes de que esta pueda retirarse; si el cursor continúa sobre la barra, permanece visible.
 - Un clic en una zona vacía de la barra principal cierra únicamente el cajón extendido y conserva la barra mientras el cursor permanezca allí.
 - Pantalla completa real: las hojas tocan el borde superior y llegan hasta la franja inferior; la barra lateral reaparece al llevar el puntero al borde izquierdo.
+- Al activar pantalla completa en PC desde la barra lateral, esta permanece visible mientras el cursor continúe sobre ella.
 - Contador dentro de una franja negra mínima en el borde inferior.
 - Enlaces externos clicables y táctiles en la página de referencias.
 

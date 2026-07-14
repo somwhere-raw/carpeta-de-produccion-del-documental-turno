@@ -955,7 +955,7 @@
         line-height: 1.35;
         letter-spacing: .09em;
       }
-      .sidebar .toolbar { width: auto; flex: 0 0 auto; }
+      .sidebar .toolbar { width: auto; margin-left: auto; flex: 0 0 auto; }
       .sidebar .control {
         display: flex;
         align-items: center;
@@ -1507,7 +1507,8 @@
         setTimeout(rerenderCurrent,80);
         return;
       }
-      document.body.classList.remove("sidebar-peek");
+      const enteringFullscreen = !document.fullscreenElement;
+      if (!enteringFullscreen) document.body.classList.remove("sidebar-peek");
       try {
         if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
         else await document.exitFullscreen?.();
@@ -1541,7 +1542,8 @@
     });
     document.addEventListener("fullscreenchange",() => {
       const panelOpen = document.body.classList.contains("pages-open") || document.body.classList.contains("index-open");
-      document.body.classList.toggle("sidebar-peek",Boolean(document.fullscreenElement && panelOpen));
+      const keepSidebar = Boolean(document.fullscreenElement && (panelOpen || pointerOverSidebar()));
+      document.body.classList.toggle("sidebar-peek",keepSidebar);
       fullscreenButton.setAttribute("aria-pressed",String(Boolean(document.fullscreenElement)));
       fullscreenButton.setAttribute("aria-label",document.fullscreenElement ? "Salir de pantalla completa" : "Activar pantalla completa");
       setTimeout(rerenderCurrent,120);
