@@ -19,7 +19,9 @@ Este prototipo contiene:
 - Cabecera móvil con identidad `Turno / Carpeta de producción`, línea amarilla vertical y grupo de iconos vectoriales alineado a la derecha.
 - Modo de pantalla completa propio para móvil vertical: conserva la cabecera accesible y expande la hoja de borde a borde horizontal.
 - Los botones `Índice` y `Páginas` abren y cierran sus propios paneles; no se utilizan cruces de cierre.
+- El índice abre directamente la lista de secciones, sin encabezado ni subtítulo introductorio.
 - Panel de miniaturas superpuesto, sin títulos auxiliares y sin redimensionar el libro; permanece abierto hasta pulsar nuevamente `Páginas`.
+- Al elegir una sección del índice o una miniatura de páginas, el visor navega al destino y guarda automáticamente el panel.
 - En móvil táctil solo se enmarca la página seleccionada; las barras de desplazamiento tienen un margen reservado para no tocar miniaturas ni entradas del índice.
 - Un clic fuera de `Índice` o `Páginas` cierra el panel abierto sin ejecutar la navegación de la hoja situada detrás.
 - En pantalla completa, el cajón extendido se guarda completamente debajo de la barra principal antes de que esta pueda retirarse; si el cursor continúa sobre la barra, permanece visible.

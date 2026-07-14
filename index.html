@@ -919,7 +919,8 @@
       scrollbar-color: rgba(231,182,0,.55) rgba(255,255,255,.045);
     }
     .thumbs { padding-right: .8rem; }
-    .index-panel { padding-right: 1rem; }
+    .index-panel { padding: .85rem 1rem 1rem 1.25rem; }
+    .index-panel .toc { padding-top: 0; border-top: 0; }
     .thumbs::-webkit-scrollbar,
     .index-panel::-webkit-scrollbar { width: .38rem; }
     .thumbs::-webkit-scrollbar-track,
@@ -1063,9 +1064,6 @@
 
   <div class="backdrop" id="backdrop"></div>
   <aside class="index-panel" id="indexPanel" aria-hidden="true">
-    <div class="panel-head">
-      <div><h2>Índice</h2><small>Navegación por secciones</small></div>
-    </div>
     <nav class="toc" id="toc"></nav>
   </aside>
 
@@ -1377,7 +1375,10 @@
         button.type = "button";
         button.dataset.page = page;
         button.innerHTML = `<span class="thumb-media"></span><span class="thumb-label">${page === 1 ? "Portada" : `Página ${contentNumber(page)}`}</span>`;
-        button.addEventListener("click",() => goToPage(page,page > focusPage ? "forward" : "back"));
+        button.addEventListener("click",() => {
+          goToPage(page,page > focusPage ? "forward" : "back");
+          closePages();
+        });
         fragment.append(button);
       }
       thumbs.replaceChildren(fragment);
