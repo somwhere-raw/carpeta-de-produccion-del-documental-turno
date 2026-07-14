@@ -807,7 +807,8 @@
     .toc button {
       transition: border-color .16s ease, background-color .16s ease, color .16s ease !important;
     }
-    .sidebar .control[aria-expanded="true"] {
+    .sidebar .control[aria-expanded="true"],
+    .sidebar .control[aria-pressed="true"] {
       border-color: rgba(231,182,0,.82);
       color: var(--ink);
       background: rgba(231,182,0,.13);
@@ -889,6 +890,127 @@
       }
     }
 
+    /* Ajustes finales para interacción táctil y móvil vertical. */
+    .sidebar .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      flex: 0 0 1.25rem;
+      line-height: 0;
+    }
+    .sidebar .icon svg {
+      display: block;
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .sidebar .icon circle { fill: currentColor; stroke: none; }
+
+    .thumbs,
+    .index-panel {
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(231,182,0,.55) rgba(255,255,255,.045);
+    }
+    .thumbs { padding-right: .8rem; }
+    .index-panel { padding-right: 1rem; }
+    .thumbs::-webkit-scrollbar,
+    .index-panel::-webkit-scrollbar { width: .38rem; }
+    .thumbs::-webkit-scrollbar-track,
+    .index-panel::-webkit-scrollbar-track { background: rgba(255,255,255,.045); }
+    .thumbs::-webkit-scrollbar-thumb,
+    .index-panel::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(231,182,0,.55);
+    }
+
+    @media (max-width: 760px) and (orientation: portrait) {
+      :root { --sidebar-height: 4.25rem; }
+
+      .sidebar { padding: .52rem .58rem; }
+      .sidebar .brand {
+        display: flex;
+        align-items: center;
+        gap: .48rem;
+        min-width: 8.7rem;
+        padding-right: .35rem;
+      }
+      .sidebar .brand div { display: block; }
+      .sidebar .brand-mark {
+        width: .25rem;
+        height: 2.2rem;
+        flex: 0 0 .25rem;
+      }
+      .sidebar .brand strong { font-size: .68rem; line-height: 1.2; }
+      .sidebar .brand span {
+        display: block;
+        max-width: 7rem;
+        font-size: .48rem;
+        line-height: 1.35;
+        letter-spacing: .09em;
+      }
+      .sidebar .toolbar { width: auto; flex: 0 0 auto; }
+      .sidebar .control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.55rem;
+        height: 2.55rem;
+        padding: 0;
+      }
+      .sidebar .control .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-basis: 1.25rem;
+      }
+
+      .pages-panel { padding: .7rem .45rem .7rem .7rem; }
+      .thumbs { padding: .15rem .8rem .9rem .1rem; }
+      .index-panel { padding-right: .85rem; }
+      .toc { padding-right: .55rem; }
+
+      .thumb.is-visible:not(.is-selected),
+      .thumb:hover:not(.is-selected) {
+        border-color: transparent !important;
+        color: var(--muted);
+        background: transparent !important;
+        transform: none !important;
+      }
+      .thumb.is-selected,
+      .thumb.is-selected:hover {
+        border-color: var(--yellow) !important;
+        color: var(--ink);
+        background: rgba(231,182,0,.13) !important;
+      }
+
+      body.mobile-fullscreen .reader,
+      body.mobile-fullscreen.pages-open .reader {
+        inset: var(--sidebar-height) 0 var(--status-height) 0;
+        padding: 0;
+      }
+      body.mobile-fullscreen .book,
+      body.mobile-fullscreen .book.mode-spread,
+      body.mobile-fullscreen.pages-open .book,
+      body.mobile-fullscreen.pages-open .book.mode-spread,
+      :fullscreen .book,
+      :fullscreen .book.mode-spread {
+        width: 100vw;
+        height: auto;
+        max-width: none;
+        max-height: calc(100dvh - var(--sidebar-height) - var(--status-height));
+        aspect-ratio: var(--page-ratio);
+        filter: none;
+      }
+      body.mobile-fullscreen .page-slot,
+      :fullscreen .page-slot { border-radius: 0 !important; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
@@ -903,9 +1025,9 @@
         <div><strong>Turno</strong><span>Carpeta de producción</span></div>
       </div>
       <nav class="toolbar" aria-label="Herramientas del libro">
-        <button class="control" id="indexOpen" type="button" aria-controls="indexPanel" aria-expanded="false"><span class="icon">☷</span><span class="label">Índice</span></button>
-        <button class="control" id="pagesToggle" type="button" aria-controls="pagesPanel" aria-expanded="false"><span class="icon">▦</span><span class="label">Páginas</span></button>
-        <button class="control" id="fullscreen" type="button" aria-label="Activar pantalla completa"><span class="icon">⛶</span><span class="label">Pantalla</span></button>
+        <button class="control" id="indexOpen" type="button" aria-controls="indexPanel" aria-expanded="false"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h11M8 12h11M8 17h11"/><circle cx="4.5" cy="7" r=".8"/><circle cx="4.5" cy="12" r=".8"/><circle cx="4.5" cy="17" r=".8"/></svg></span><span class="label">Índice</span></button>
+        <button class="control" id="pagesToggle" type="button" aria-controls="pagesPanel" aria-expanded="false"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="7" rx=".7"/><rect x="14" y="4" width="6" height="7" rx=".7"/><rect x="4" y="14" width="6" height="6" rx=".7"/><rect x="14" y="14" width="6" height="6" rx=".7"/></svg></span><span class="label">Páginas</span></button>
+        <button class="control" id="fullscreen" type="button" aria-label="Activar pantalla completa" aria-pressed="false"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></span><span class="label">Pantalla</span></button>
       </nav>
     </header>
 
@@ -1374,10 +1496,24 @@
       slot === slots[0] ? previousDisplay() : nextDisplay();
     });
 
-    $("#fullscreen").addEventListener("click",async () => {
+    const fullscreenButton = $("#fullscreen");
+    const isPortraitMobile = () => MOBILE_QUERY.matches && innerHeight > innerWidth;
+
+    fullscreenButton.addEventListener("click",async () => {
+      if (isPortraitMobile()) {
+        const enabled = document.body.classList.toggle("mobile-fullscreen");
+        fullscreenButton.setAttribute("aria-pressed",String(enabled));
+        fullscreenButton.setAttribute("aria-label",enabled ? "Salir de pantalla completa" : "Activar pantalla completa");
+        setTimeout(rerenderCurrent,80);
+        return;
+      }
       document.body.classList.remove("sidebar-peek");
-      if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
-      else await document.exitFullscreen?.();
+      try {
+        if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+        else await document.exitFullscreen?.();
+      } catch (error) {
+        console.warn("El navegador no permitió pantalla completa.",error);
+      }
       setTimeout(rerenderCurrent,450);
     });
 
@@ -1406,6 +1542,8 @@
     document.addEventListener("fullscreenchange",() => {
       const panelOpen = document.body.classList.contains("pages-open") || document.body.classList.contains("index-open");
       document.body.classList.toggle("sidebar-peek",Boolean(document.fullscreenElement && panelOpen));
+      fullscreenButton.setAttribute("aria-pressed",String(Boolean(document.fullscreenElement)));
+      fullscreenButton.setAttribute("aria-label",document.fullscreenElement ? "Salir de pantalla completa" : "Activar pantalla completa");
       setTimeout(rerenderCurrent,120);
     });
 
@@ -1423,6 +1561,11 @@
     },{passive:true});
 
     window.addEventListener("resize",() => {
+      if (document.body.classList.contains("mobile-fullscreen") && !isPortraitMobile()) {
+        document.body.classList.remove("mobile-fullscreen");
+        fullscreenButton.setAttribute("aria-pressed","false");
+        fullscreenButton.setAttribute("aria-label","Activar pantalla completa");
+      }
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(rerenderCurrent,260);
     });
